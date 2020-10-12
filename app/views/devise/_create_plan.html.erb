@@ -25,6 +25,14 @@
   <p>
     <%= form.submit %>
   </p>
+  <%= form.fields_for :features, @plan.features.build do |f_feature| %>
+    <%= f_feature.label :name, :class => 'col-sm-2 control-label' do %>
+      Features
+    <% end %>
+    <div class="col-sm-10">
+      <%= f_feature.text_field :name, :class => 'form-control' %>
+    </div>
+  <% end %>
 <% end %>
 
 

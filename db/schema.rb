@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_08_172322) do
+ActiveRecord::Schema.define(version: 2020_10_12_065544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,10 +41,15 @@ ActiveRecord::Schema.define(version: 2020_10_08_172322) do
     t.string "code"
     t.integer "unit_price"
     t.integer "max_limit"
-    t.bigint "plan_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["plan_id"], name: "index_features_on_plan_id"
+  end
+
+  create_table "features_plans", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.bigint "feature_id"
+    t.index ["feature_id"], name: "index_features_plans_on_feature_id"
+    t.index ["plan_id"], name: "index_features_plans_on_plan_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -92,7 +97,8 @@ ActiveRecord::Schema.define(version: 2020_10_08_172322) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "features", "plans"
+  add_foreign_key "features_plans", "features"
+  add_foreign_key "features_plans", "plans"
   add_foreign_key "plans", "users"
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
