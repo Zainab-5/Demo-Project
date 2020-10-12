@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  plan: one
+  is_recurring: MyString
+  billing_date: MyString
+
+two:
+  user: two
+  plan: two
+  is_recurring: MyString
+  billing_date: MyString
