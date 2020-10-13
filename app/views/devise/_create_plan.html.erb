@@ -12,6 +12,7 @@
   </p>
 <% end %>
 
+
 <h2>Add a Plan:</h2>
 <%= form_with(model: [ user.becomes(User), user.plans.build ], local: true) do |form| %>
   <p>
@@ -23,16 +24,15 @@
     <%= form.text_area :fee %>
   </p>
   <p>
+    <%= form.label :feature_ids, "Features" %><br />
+    <%= form.collection_check_boxes :feature_ids, Feature.all, :id, :name, {}, {multiple: true} %>
+  </p>
+
+
+  <p>
     <%= form.submit %>
   </p>
-  <%= form.fields_for :features, @plan.features.build do |f_feature| %>
-    <%= f_feature.label :name, :class => 'col-sm-2 control-label' do %>
-      Features
-    <% end %>
-    <div class="col-sm-10">
-      <%= f_feature.text_field :name, :class => 'form-control' %>
-    </div>
-  <% end %>
+
 <% end %>
 
 
