@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users do
     resources :plans
+      resources :features
+    resources :subscriptions
   end
 
   get 'welcome/index'

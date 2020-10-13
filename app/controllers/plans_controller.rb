@@ -8,7 +8,7 @@ class PlansController < ApplicationController
 
     private
       def plan_params
-        params.require(:plan).permit(:name, :fee)
+        params.require(:plan).permit(:name, :fee, feature_ids: [])
       end
 
 
