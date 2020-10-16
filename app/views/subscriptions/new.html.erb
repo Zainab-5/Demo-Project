@@ -1,0 +1,15 @@
+<%= form_with(model: @subscription, local: true) do |form| %>
+  <p>
+    <%= form.label :billing_date %><br>
+    <%= form.text_field :billing_date %>
+  </p>
+
+  <p>
+    <%= form.label :plan_id, "Plan" %><br />
+    <%= select_tag :plan_id, options_for_select(Plan.all.collect{ |u| [u.name, u.id] }) %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>

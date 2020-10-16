@@ -1,0 +1,24 @@
+<h2>Create a Plan:</h2>
+<%= form_with model: @plan, local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :fee %><br>
+    <%= form.text_area :fee %>
+  </p>
+
+  <ul>
+    <%= form.collection_check_boxes :feature_ids, Feature.all, :id, :name, {}, {multiple: true} do |b| %>
+      <li>
+        <%= b.label %>
+        <%= b.check_box %>
+      </li>
+    <% end %>
+  </ul>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

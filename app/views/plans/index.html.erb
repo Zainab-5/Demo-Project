@@ -1,0 +1,34 @@
+<h2>Plans</h2>
+<div id="abc">
+
+   <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Plan Name</th>
+        <th>Fee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Plan.all.each do |plan| %>
+          <tr id="plan_<%= plan.id %>">
+            <td>
+              <%= plan.name %>
+            </td>
+            <td>
+              <%= plan.fee %>
+            </td>
+            <% if user_signed_in? && current_user.type == 'Admin'  %>
+              <td>
+                <%= link_to 'Edit', edit_plan_path(plan) %>
+              </td>
+              <td>
+                <%= link_to 'Delete', plan_path(plan),remote: true, method: :delete, data: { confirm: "Are you sure?" } %>
+              </td>
+            <% end %>
+          </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

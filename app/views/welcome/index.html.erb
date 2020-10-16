@@ -5,12 +5,6 @@
       <div> <%= current_user.name %> </div>
       <div> <%= current_user.email %> </div>
       <div> <%= image_tag current_user.image %> </div>
-      <% if current_user.type == "Admin" %>
-         <%= render(:partial => "devise/create_plan", :locals => { :user => current_user})%>
-      <% end %>
-       <% if current_user.type == "Buyer" %>
-         <%= render(:partial => "Buyer/create_subscription", :locals => { :user => current_user})%>
-      <% end %>
   <% end %>
 
 
