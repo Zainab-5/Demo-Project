@@ -1,0 +1,32 @@
+<h2>Features</h2>
+<div id="abc">
+
+   <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Feature Name</th>
+        <th>Unit_price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Feature.all.each do |feature| %>
+          <tr id="feature_<%= feature.id %>">
+            <td>
+              <%= feature.name %>
+            </td>
+            <td>
+              <%= feature.unit_price %>
+            </td>
+            <td>
+              <%= link_to 'Edit',edit_feature_path(feature) %>
+            </td>
+            <td>
+              <%= link_to 'Delete', feature_path(feature),remote: true, method: :delete, data: { confirm: "Are you sure?" } %>
+            </td>
+          </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

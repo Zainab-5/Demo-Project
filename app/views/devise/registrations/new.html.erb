@@ -33,9 +33,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :type %><br />
-      <%= f.radio_button :type, 'Admin' %> Playlist
-      <%= f.radio_button :type, 'Buyer' %> BlogPost
+      <%= f.hidden_field :type, value: "Buyer" %>
     </div>
 
     <div class="actions">
@@ -43,6 +41,5 @@
     </div>
   <% end %>
 </div>
-
 
 

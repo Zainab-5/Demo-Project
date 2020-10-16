@@ -1,0 +1,28 @@
+<% if current_user.type == 'Buyer' %>
+   <h2>Your Subscriptions</h2>
+<% end %>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Plan</th>
+        <th>Billing Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subscriptions.each do |subscription| %>
+          <tr>
+            <td>
+              <%= subscription.user_id %>
+            </td>
+            <td>
+              <%= subscription.plan_id %>
+            </td>
+            <td>
+              <%= subscription.billing_date %>
+            </td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+
