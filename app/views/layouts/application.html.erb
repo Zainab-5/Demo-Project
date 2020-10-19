@@ -4,17 +4,13 @@
     <title>TestProject</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag   'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
   </head>
 
   <body>
-
     <div class="container">
       <% if !current_user %>
-
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -38,6 +34,7 @@
       <% end %>
 
       <%= yield %>
+
     </div>
   </body>
 </html>

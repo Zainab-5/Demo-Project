@@ -1,50 +1,19 @@
-<%= form_with(model: @usage, local: true) do |form| %>
-  <p>
-    <%= form.label :units_used %><br>
-    <%= form.text_field :units_used %>
-  </p>
-
-  <div class="sub">
-    <%= form.label :subscription_id, "Subscription" %><br />
-    <%= select_tag :subscription_id, options_for_select(@subscriptions.collect{ |u| [u.id] }, selected: params[:subscription_id]) %>
-  </p>
-
-  <p class="feature">
-    <%= form.label :feature_id, "Feature" %><br />
-    <%= select_tag :feature_id, options_for_select(@features.collect{ |u| [u.name, u.id] }) %>
-  </p>
-
-
-  <p>
-    <%= form.submit %>
-  </p>
-
-<% end %>
-<script>
- jQuery(function(){
-    $("#feature_id").append('<option>Select feature</option>');
-    $(document).on("change", "#sub select", function(){
-    var country = $(this).val();
-
-    $.ajax({
-      url: "/users/new",
-      method: "GET",
-      dataType: "json",
-      data: {country: country},
-      error: function (xhr, status, error) {
-        console.error('AJAX Error: ' + status + error);
-      },
-      success: function (response) {
-        console.log(response);
-        var cities = response["features"];
-        $("#feature select").empty();
-
-        $("#feature select").append('<option>Select feature</option>');
-        for(var i=0; i<features.length; i++){
-          $("#feature select").append('<option value="' + features[i]["id"] + '">' + features[i]["name"] + '</option>');
-        }
-      }
-    });
-  });
-  });
-</script>
+<div class="container" style="width: 200px; padding: 30px;">
+  <%= form_with(model: @usage, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :units_used %><br>
+      <%= form.number_field :units_used %>
+    </div>
+    <div class="sub form-group">
+      <%= form.label :subscription_id, "Subscription" %><br />
+      <%= select_tag :subscription_id, options_for_select(@subscriptions.collect{ |u| [u.id] }) %>
+    </div>
+    <div class="feature form-group">
+      <%= form.label :feature_id, "Feature" %><br />
+      <%= select_tag :feature_id, options_for_select(@features.collect{ |u| [u.name, u.id] }) %>
+    </div>
+    <div>
+      <%= form.submit "Create Usage", class: 'btn btn-success'%>
+    </div>
+  <% end %>
+</div>

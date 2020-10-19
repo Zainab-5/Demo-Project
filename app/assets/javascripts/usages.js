@@ -1,25 +1,23 @@
-
-  $("#feature select").append('<option>Select feature</option>');
-  $(document).on("change", "#sub select", function(){
-  var country = $(this).val();
-
+jQuery(function(){
+  $( "#subscription_id" ).change(function() {
+  var subscription = $(this).val();
   $.ajax({
-    url: "/users/new",
+    url: "/usages/new",
     method: "GET",
     dataType: "json",
-    data: {country: country},
+    data: {subscription: subscription},
     error: function (xhr, status, error) {
       console.error('AJAX Error: ' + status + error);
     },
     success: function (response) {
       console.log(response);
-      var cities = response["features"];
-      $("#feature select").empty();
-
-      $("#feature select").append('<option>Select feature</option>');
+      var features = response["features"];
+      $("#feature_id").empty();
+      $("#feature_id").append('<option>Select feature</option>');
       for(var i=0; i<features.length; i++){
-        $("#feature select").append('<option value="' + features[i]["id"] + '">' + features[i]["name"] + '</option>');
+        $("#feature_id").append('<option value="' + features[i]["id"] + '">' + features[i]["name"] + '</option>');
       }
     }
   });
+});
 });

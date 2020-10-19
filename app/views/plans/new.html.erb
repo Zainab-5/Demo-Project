@@ -1,27 +1,5 @@
-<h2>Create a Plan</h2>
-<div class="container" >
-  <%= form_with model: @plan, local: true do |form| %>
-    <p>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
-    </p>
-    <p>
-      <%= form.label :fee %><br>
-      <%= form.text_area :fee %>
-    </p>
+<h2 class="text-center">Create a Plan</h2>
+<%= render 'form', plan: @plan %>
 
-    <div class= "form-group">
-      <%= form.collection_check_boxes :feature_ids, Feature.all, :id, :name, {}, {multiple: true} do |b| %>
-        <div>
-          <%= b.label(class: "form-check-label") %>
-          <%= b.check_box (class: "form-input") %>
-        </div>
-      <% end %>
-    </div>
 
-    <p>
 
-      <%= form.submit(class: "btn btn-success") %>
-    </p>
-  <% end %>
-</div>

@@ -1,22 +1,17 @@
 class UsagesController < ApplicationController
   def create
-    @user = User.find(current_user.id)
-    @usage =  @user.transactions.create(transaction_params)
+    @usage = Usage.create(units_used: params[:usage][:units_used], subscription_id: params[:subscription_id], feature_id: params[:feature_id])
+    byebug
+    redirect_to plans_path
   end
 
   def new
-=begin
-    @usage = Usage.new
-    if params[:subscription_id].present?
-      byebug
-     puts "hello"
-    end
-=end
     @usage= Usage.new
     @subscriptions = Subscription.all
     @features = []
-    if params[:subscription_id].present?
-      plan = Plan.find_by(subscription_id: params[:subscription_id])
+
+    if params[:subscription].present?
+      plan = Subscription.find( params[:subscription]).plan
       @features = plan.features
     end
     if request.xhr?
@@ -31,6 +26,6 @@ class UsagesController < ApplicationController
 
   private
     def usage_params
-      params.require(:usage).permit(:feature_id, :subscription_id,:units_used)
+      params.require(:usage).permit(:units_used)
     end
 end
