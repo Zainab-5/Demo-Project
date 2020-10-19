@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'usages/index'
-  root to: 'welcome#index'
   devise_for :users
   resources :plans
   resources :subscriptions
@@ -9,5 +6,8 @@ Rails.application.routes.draw do
   resources :features
   resources :usages
   get 'welcome/index'
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 
 end

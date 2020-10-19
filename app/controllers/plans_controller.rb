@@ -10,12 +10,13 @@ class PlansController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @plan = @user.plans.new(plan_params)
-
-    respond_to do |format|
-      if @plan.save
+    if @plan.save
+      respond_to do |format|
         format.html { redirect_to plans_path, notice: 'Plan was successfully created.' }
         format.js
       end
+    else
+      render 'new'
     end
   end
 
