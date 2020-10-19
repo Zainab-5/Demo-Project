@@ -4,6 +4,7 @@ class SubscriptionsController < ApplicationController
     @user = User.find(current_user.id)
     @plan = Plan.find(params[:plan_id])
     @subscription = @user.subscriptions.create(billing_date: params[:subscription][:billing_date], plan_id: @plan.id)
+    SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
     redirect_to subscriptions_path
   end
 
