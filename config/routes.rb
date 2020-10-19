@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :subscriptions
   resources :plans
   resources :features
+  resources :usages
   get 'welcome/index'
 
 end

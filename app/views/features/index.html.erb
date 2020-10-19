@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% Feature.all.each do |feature| %>
+      <% @features.each do |feature| %>
           <tr id="feature_<%= feature.id %>">
             <td>
               <%= feature.name %>
@@ -24,7 +24,6 @@
               <%= link_to 'Delete', feature_path(feature),remote: true, method: :delete, data: { confirm: "Are you sure?" } %>
             </td>
           </tr>
-
       <% end %>
     </tbody>
   </table>

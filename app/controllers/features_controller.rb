@@ -1,11 +1,15 @@
 class FeaturesController < ApplicationController
   def create
-    @feature = Feature.create(feature_params)
-    redirect_to features_path
+    @feature = Feature.new(feature_params)
+    if @feature.save
+      redirect_to features_path
+    else
+      render 'new'
+    end
   end
 
   def index
-    @feature = Feature.all
+    @features = Feature.all
   end
 
   def new
@@ -26,6 +30,7 @@ class FeaturesController < ApplicationController
 
   def edit
     @feature = Feature.find(params[:id])
+    authorize @feature
   end
 
   def update
@@ -40,6 +45,6 @@ class FeaturesController < ApplicationController
 
   private
     def feature_params
-      params.require(:feature).permit(:name, :unit_price)
+      params.require(:feature).permit(:name, :unit_price, :max_limit)
     end
 end

@@ -1,6 +1,7 @@
 class Subscription < ApplicationRecord
   belongs_to :user
   belongs_to :plan
+  has_many :usages
   accepts_nested_attributes_for :plan
   after_save :create_transaction
 

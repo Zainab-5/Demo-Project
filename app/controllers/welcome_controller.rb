@@ -1,10 +1,8 @@
 class WelcomeController < ApplicationController
   def index
-
   end
 
   def show_profile
-
   end
 
   def all_subscriptions
