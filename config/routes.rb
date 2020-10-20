@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  root to: 'welcome#index'
   devise_for :users
-  resources :users do
-    resources :plans
-      resources :features
-    resources :subscriptions
+  resources :plans
+  resources :subscriptions
+  resources :plans
+  resources :features
+  resources :usages
+  get 'welcome/index'
+  devise_scope :user do
+    root to: "devise/sessions#new"
   end
 
-  get 'welcome/index'
 end
