@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% Plan.all.each do |plan| %>
+      <% @plan.each do |plan| %>
           <tr id="plan_<%= plan.id %>">
             <td>
               <%= plan.name %>

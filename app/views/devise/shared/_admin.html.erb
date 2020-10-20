@@ -24,9 +24,13 @@
       </div>
 
       <% if user_signed_in? %>
-        <a class="navbar-brand" href="#">
-          <%= image_tag current_user.image, class: "style_image" %>
+        <%
+=begin%>
+ <a class="navbar-brand" href="#">
+          <%= image_tag current_user&.image, class: "style_image" %>
         </a>
+<%
+=end%>
         <%= link_to "Logout", destroy_user_session_path, :method => :delete %>
       <% end %>
   </nav>

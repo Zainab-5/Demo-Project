@@ -1,15 +1,8 @@
 
 <%= form_with model: @feature, local: true do |form| %>
   <% if @feature.errors.any?  %>
-  <div>
-    <h1> <%= pluralize(@feature.errors.count,'error') %> prohibited this feature from being saved. </h1>
-    <ul>
-    <%  @feature.errors.full_messages.each do |msg| %>
-    <li> <%= msg %> </li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
+    <%= render 'error', obj: @feature.errors %>
+ <% end %>
 <div class="container" style="width: 200px">
   <%= form_with model: @feature do |form| %>
     <div class="form-group">

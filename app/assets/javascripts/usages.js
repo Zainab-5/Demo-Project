@@ -1,5 +1,6 @@
 jQuery(function(){
-  $( "#subscription_id" ).change(function() {
+  $( "#usage_subscription_id" ).change(function() {
+
   var subscription = $(this).val();
   $.ajax({
     url: "/usages/new",
@@ -12,10 +13,10 @@ jQuery(function(){
     success: function (response) {
       console.log(response);
       var features = response["features"];
-      $("#feature_id").empty();
-      $("#feature_id").append('<option>Select feature</option>');
+      $("#usage_feature_id").empty();
+      $("#usage_feature_id").append('<option>Select feature</option>');
       for(var i=0; i<features.length; i++){
-        $("#feature_id").append('<option value="' + features[i]["id"] + '">' + features[i]["name"] + '</option>');
+        $("#usage_feature_id").append('<option value="' + features[i]["id"] + '">' + features[i]["name"] + '</option>');
       }
     }
   });

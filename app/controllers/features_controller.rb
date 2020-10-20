@@ -22,7 +22,7 @@ class FeaturesController < ApplicationController
     authorize @feature
     respond_to do |format|
       if @feature.destroy
-        format.html { redirect_to welcome_index_path, notice: 'feature was successfully created.' }
+        format.html { redirect_to features_path, notice: 'feature was successfully created.' }
         format.js
       end
     end
@@ -37,7 +37,7 @@ class FeaturesController < ApplicationController
     @feature = Feature.find(params[:id])
     authorize @feature
     if @feature.update(feature_params)
-      redirect_to welcome_index_path
+      redirect_to features_path
     else
       render 'edit'
     end

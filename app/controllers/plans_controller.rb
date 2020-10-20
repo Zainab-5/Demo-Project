@@ -1,6 +1,6 @@
 class PlansController < ApplicationController
   def index
-
+   @plan = Plan.all
   end
 
   def new
@@ -8,13 +8,10 @@ class PlansController < ApplicationController
   end
 
   def create
-    @user = User.find(current_user.id)
-    @plan = @user.plans.new(plan_params)
+    #@user = User.find(current_user.id)
+    @plan = current_user.plans.new(plan_params)
     if @plan.save
-      respond_to do |format|
-        format.html { redirect_to plans_path, notice: 'Plan was successfully created.' }
-        format.js
-      end
+      redirect_to plans_path
     else
       render 'new'
     end
@@ -28,7 +25,7 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
     authorize @plan
     if @plan.update(plan_params)
-      redirect_to welcome_index_path
+      redirect_to plans_path
     else
       render 'edit'
     end
@@ -38,7 +35,7 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
     respond_to do |format|
       if @plan.destroy
-        format.html { redirect_to welcome_index_path, notice: 'Plan was successfully created.' }
+        format.html { redirect_to plans_path, notice: 'Plan was successfully created.' }
         format.js
       end
     end

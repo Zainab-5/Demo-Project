@@ -1,6 +1,7 @@
 class UsagesController < ApplicationController
   def create
-    @usage = Usage.create(units_used: params[:usage][:units_used], subscription_id: params[:subscription_id], feature_id: params[:feature_id])
+    @usage = Usage.create(usage_params)
+    byebug
     redirect_to plans_path
   end
 
@@ -24,6 +25,6 @@ class UsagesController < ApplicationController
 
   private
     def usage_params
-      params.require(:usage).permit(:units_used)
+      params.require(:usage).permit(:units_used,:subscription_id, :feature_id)
     end
 end
