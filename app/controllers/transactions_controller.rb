@@ -1,7 +1,6 @@
 class TransactionsController < ApplicationController
   def create
-    @user = User.find(current_user.id)
-    @transaction = @user.transactions.create(transaction_params)
+    @transaction = current_user.transactions.create(transaction_params)
   end
 
   private

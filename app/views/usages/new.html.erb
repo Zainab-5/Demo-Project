@@ -6,11 +6,11 @@
     </div>
     <div class="sub form-group">
       <%= form.label :subscription_id, "Subscription" %><br />
-      <%= select_tag :subscription_id, options_for_select(@subscriptions.collect{ |u| [u.id] }) %>
+      <%= form.select :subscription_id, options_for_select(@subscriptions.collect{ |u| [u.id] }) %>
     </div>
     <div class="feature form-group">
       <%= form.label :feature_id, "Feature" %><br />
-      <%= select_tag :feature_id, options_for_select(@features.collect{ |u| [u.name, u.id] }) %>
+      <%= form.select :feature_id, options_for_select(@features.collect{ |u| [u.name, u.id] }) %>
     </div>
     <div>
       <%= form.submit "Create Usage", class: 'btn btn-success'%>

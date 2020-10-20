@@ -1,22 +1,25 @@
 class SubscriptionsController < ApplicationController
 
   def create
-    @user = User.find(current_user.id)
     @plan = Plan.find(params[:plan_id])
-    @subscription = @user.subscriptions.create(billing_date: params[:subscription][:billing_date], plan_id: @plan.id)
-    SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
-    redirect_to subscriptions_path
+    if current_user.subscriptions.create(billing_date: Date.today.day, plan_id: @plan.id)
+      SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
+      redirect_to subscriptions_path
+    else
+      render 'new'
+    end
   end
 
   def new
     @subscription = Subscription.new
+    @plans = Plan.all
   end
 
   def index
     if(current_user.type == 'Buyer')
-      @subscriptions = Subscription.where(user_id: current_user.id).all
+      @subscriptions = Subscription.where(user_id: current_user.id).includes(:plan)
     else
-      @subscriptions = Subscription.all
+      @subscriptions = Subscription.all.includes(:plan)
     end
   end
 

@@ -1,18 +1,10 @@
 
 <%= form_with model: @plan, local: true do |form| %>
   <% if @plan.errors.any?  %>
-    <div>
-      <h1> <%= pluralize(@plan.errors.count,'error') %> prohibited this plan from being saved. </h1>
-      <ul>
-      <%  @plan.errors.full_messages.each do |msg| %>
-      <li> <%= msg %> </li>
-      <% end %>
-      </ul>
-    </div>
+    <%= render 'error', obj: @plan.errors %>
   <% end %>
 <% end %>
 
-<h2 class="text-center">Create a Plan</h2>
 <div class="container", style= "width: 300px;" >
   <%= form_with model: @plan, local: true do |form| %>
     <div class= "form-group">
@@ -23,7 +15,6 @@
       <%= form.label :fee %><br>
       <%= form.number_field :fee,{class: "form-control"} %>
     </div>
-
     <div class= "form-group">
       <%= form.collection_check_boxes :feature_ids, Feature.all, :id, :name, {}, {multiple: true} do |b| %>
         <div>
@@ -32,10 +23,10 @@
         </div>
       <% end %>
     </div>
-
     <div class="text-center">
       <%= form.submit "Save", class: "btn btn-success" %>
     </div>
   <% end %>
 </div>
+
 

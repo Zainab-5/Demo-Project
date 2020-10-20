@@ -1,3 +1,8 @@
+<%= form_with model: @subscription, local: true do |form| %>
+  <% if @subscription.errors.any?  %>
+    <%= render 'error', obj: @subscription.errors %>
+  <% end %>
+<% end %>
 
 <div class="container", style= "width: 300px;" >
   <%= form_with(model: @subscription, local: true) do |form| %>
@@ -8,7 +13,7 @@
 
     <div class= "form-group">
       <%= form.label :plan_id, "Plan" %><br />
-      <%= select_tag :plan_id, options_for_select(Plan.all.collect{ |u| [u.name, u.id] }) %>
+      <%= select_tag :plan_id, options_for_select(@plans.collect{ |u| [u.name, u.id] }) %>
     </div>
     <div >
       <%= form.submit  "Create Subscription",  class: "btn btn-success" %>
