@@ -23,7 +23,6 @@
             </ul>
           </div>
         </nav>
-
       <% end %>
       <% if user_signed_in? && current_user.type == 'Admin'  %>
         <%= render  "devise/shared/admin" %>

@@ -1,7 +1,6 @@
 class UsagesController < ApplicationController
   def create
     @usage = Usage.create(units_used: params[:usage][:units_used], subscription_id: params[:subscription_id], feature_id: params[:feature_id])
-    byebug
     redirect_to plans_path
   end
 
@@ -9,7 +8,6 @@ class UsagesController < ApplicationController
     @usage= Usage.new
     @subscriptions = Subscription.all
     @features = []
-
     if params[:subscription].present?
       plan = Subscription.find( params[:subscription]).plan
       @features = plan.features
