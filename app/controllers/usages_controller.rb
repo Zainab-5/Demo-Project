@@ -12,6 +12,7 @@ class UsagesController < ApplicationController
     if params[:subscription].present?
       plan = Subscription.find( params[:subscription]).plan
       @features = plan.features
+      puts "#{@features}"
     end
     if request.xhr?
       respond_to do |format|

@@ -3,7 +3,8 @@ class BillCreator
     buyers = Buyers.all
     @over_use = 0
     buyers.subscriptions.each do |subscription|
-      if subscription.billing_date == Date.today.day
+        days = (Date.today-subscription.billing_date).to_i>1
+        subscription.update(billing_date: Date.today) if days>1
         plan = Plan.find(subscription.plan_id)
         @usages = subscription.usages
         @usages.each do |usage|
@@ -13,7 +14,8 @@ class BillCreator
             @over_use = (@exceeded_units*@feature.unit_price)+ @over_use
           end
         end
-        @over_use = @over_use + plan.fee
+        @over_use = @over_use + {(plan.fee/30)*days}
+        subscription.billing_date = Date.today
       end
     end
     @over_use

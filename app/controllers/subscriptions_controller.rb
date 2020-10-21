@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
 
   def create
     @plan = Plan.find(params[:plan_id])
-    if current_user.subscriptions.create(billing_date: Date.today.day, plan_id: @plan.id)
+    if current_user.subscriptions.create(billing_date: Date.today, plan_id: @plan.id)
       SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
       redirect_to subscriptions_path
     else

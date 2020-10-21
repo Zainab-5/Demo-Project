@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_061446) do
+ActiveRecord::Schema.define(version: 2020_10_20_134149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(version: 2020_10_16_061446) do
     t.bigint "user_id"
     t.bigint "plan_id"
     t.string "is_recurring"
-    t.string "billing_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "billing_date"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
