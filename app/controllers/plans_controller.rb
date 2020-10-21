@@ -8,7 +8,6 @@ class PlansController < ApplicationController
   end
 
   def create
-    #@user = User.find(current_user.id)
     @plan = current_user.plans.new(plan_params)
     if @plan.save
       redirect_to plans_path
