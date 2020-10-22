@@ -1,34 +1,44 @@
-<h2>Plans</h2>
-<div id="abc">
+
+<div class="row">
+  <div class="col-md-8 mx-auto" id="abc">
 
    <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>Plan Name</th>
-        <th>Fee</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @plan.each do |plan| %>
-          <tr id="plan_<%= plan.id %>">
-            <td>
-              <%= plan.name %>
-            </td>
-            <td>
-              <%= plan.fee %>
-            </td>
-            <% if user_signed_in? && current_user.type == 'Admin'  %>
+      <h2 class="text-center"><strong>Plans</strong></h2>
+      <thead>
+        <tr>
+          <th>Plan Name</th>
+          <th>Fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @plan.each do |plan| %>
+            <tr id="plan_<%= plan.id %>">
               <td>
-                <%= link_to 'Edit', edit_plan_path(plan) %>
+                <%= plan.name %>
               </td>
               <td>
-                <%= link_to 'Delete', plan_path(plan),remote: true, method: :delete, data: { confirm: "Are you sure?" } %>
+                <%= plan.fee %>
               </td>
-            <% end %>
-          </tr>
+              <% if user_signed_in? && current_user.type == 'Admin'  %>
+                <td>
+                  <%= link_to 'Edit', edit_plan_path(plan), class:'link' %>
+                </td>
+                <td>
+                  <%= link_to 'Delete', plan_path(plan),remote: true, method: :delete, data: { confirm: "Are you sure?" }, class:'link' %>
+                </td>
+              <% end %>
+            </tr>
 
-      <% end %>
-    </tbody>
-  </table>
-
+        <% end %>
+      </tbody>
+   </table>
 </div>
+</div>
+
+<% if current_user.type == 'Admin' %>
+    <div class="row">
+      <div class="col-md-8 mx-auto" >
+        <%= link_to 'Create Plan', new_plan_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+ <% end %>

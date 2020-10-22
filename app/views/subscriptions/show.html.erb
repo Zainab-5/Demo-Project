@@ -1,23 +1,26 @@
-<h2>Your Subscriptions</h2>
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Plan</th>
-        <th>Billing Date</th>
-      </tr>
-    </thead>
-    <tbody>
-         <tr>
-            <td>
-              <%= subscription.user_id %>
-            </td>
-            <td>
-              <%= subscription.plan_name %>
-            </td>
-            <td>
-              <%= subscription.billing_date %>
-            </td>
-          </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="col-md-6 mx-auto text-center">
+    <h2 class="">Usages</h2>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Units Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @usages.each do |usage| %>
+            <tr>
+              <td>
+                <%= usage.feature.name %>
+              </td>
+              <td>
+                <%= usage.units_used %>
+              </td>
+              </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
