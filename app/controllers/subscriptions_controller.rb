@@ -12,6 +12,7 @@ class SubscriptionsController < ApplicationController
 
   def new
     @subscription = Subscription.new
+    authorize @subscription
     @plans = Plan.all
   end
 
@@ -24,7 +25,13 @@ class SubscriptionsController < ApplicationController
   end
 
   def show
+     @subscription = Subscription.find(params[:id])
+     @usages = @subscription.usages
+  end
 
+  def billing
+    bill_creator = BillCreator.new
+    bill_creator.calculate_bill
   end
 
   private

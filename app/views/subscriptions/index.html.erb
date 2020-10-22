@@ -1,28 +1,51 @@
-<% if current_user.type == 'Buyer' %>
-   <h2>Your Subscriptions</h2>
-<% end %>
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Plan</th>
-        <th>Billing Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @subscriptions.each do |subscription| %>
-          <tr>
-            <td>
-              <%= subscription.user_id %>
-            </td>
-            <td>
-              <%= subscription.plan.name %>
-            </td>
-            <td>
-              <%= subscription.billing_date %>
-            </td>
-          </tr>
-      <% end %>
-    </tbody>
-  </table>
+ <div class="row">
+   <div class="col-md-8 mx-auto" >
+
+    <% if current_user.type == 'Buyer' %>
+      <h2 class="pb-200">Your Subscriptions</h2>
+    <% end %>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Plan</th>
+          <th>Billing Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subscriptions.each do |subscription| %>
+            <tr>
+              <td>
+                <%= subscription.user_id %>
+              </td>
+              <td>
+                <%= subscription.plan.name %>
+              </td>
+              <td>
+                <%= subscription.billing_date %>
+              </td>
+              <td>
+                <%= link_to 'Usage', subscription_path(subscription) %>
+              </td>
+              <% if current_user.type == 'Admin' %>
+                <td>
+                  <%= link_to 'Bill', "/bill/billing/#{subscription.id}"  %>
+                </td>
+              <% end %>
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+   </div>
+ </div>
+
+ <% if current_user.type == 'Buyer' %>
+    <div class="row">
+      <div class="col-md-8 mx-auto" >
+        <%= link_to 'Create Subscription',new_subscription_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+ <% end %>
+
 

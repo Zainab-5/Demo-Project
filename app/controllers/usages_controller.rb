@@ -22,6 +22,21 @@ class UsagesController < ApplicationController
     end
   end
 
+  def show
+    @usages = Usage.find(params[:id])
+    redirect_to plans_path
+  end
+
+  def index
+    @usage = Usage.all
+  end
+
+  def billing
+    bill_creator = BillCreator.new
+    bill_creator.calculate_bill
+  end
+
+
   private
     def usage_params
       params.require(:usage).permit(:units_used,:subscription_id, :feature_id)

@@ -9,6 +9,7 @@ class PlansController < ApplicationController
 
   def create
     @plan = current_user.plans.new(plan_params)
+    authorize @plan
     if @plan.save
       redirect_to plans_path
     else
@@ -18,6 +19,7 @@ class PlansController < ApplicationController
 
   def edit
     @plan = Plan.find(params[:id])
+    authorize @plan
   end
 
   def update
@@ -32,12 +34,20 @@ class PlansController < ApplicationController
 
   def destroy
     @plan = Plan.find(params[:id])
-    respond_to do |format|
-      if @plan.destroy
-        format.html { redirect_to plans_path, notice: 'Plan was successfully created.' }
-        format.js
+    authorize @plan
+    begin
+      respond_to do |format|
+        if @plan.destroy
+          puts "destroyed"
+          format.html { redirect_to plans_path, notice: 'Plan was successfully destroyed.' }
+          format.js
+        end
       end
+    rescue => exception
+      flash[:notice] = "Cannot delete a Subscribed Plan"
+      redirect_to plans_path
     end
+
   end
 
   private
