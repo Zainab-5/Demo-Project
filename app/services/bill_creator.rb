@@ -7,7 +7,7 @@ class BillCreator
     transaction = Transaction.find_by(subscription_id: subscription.id)
     difference = Date.today - transaction.created_at.to_date
     @over_use = 0
-
+    check = false
     if(subscription.billing_date.day == Date.today.day) || (difference > 30)
       usages.each do |usage|
         feature = Feature.find(usage.feature_id)
@@ -21,6 +21,8 @@ class BillCreator
       ActiveRecord::Base.transaction do
         @transaction = Transaction.create(fee_charged: chargeable_amount, subscription_id: subscription.id, user_id: user.id)
       end
+      check = true
     end
+    check
   end
 end

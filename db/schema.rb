@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_20_134149) do
+ActiveRecord::Schema.define(version: 2020_10_22_122637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,45 +37,45 @@ ActiveRecord::Schema.define(version: 2020_10_20_134149) do
   end
 
   create_table "features", force: :cascade do |t|
-    t.string "name"
-    t.string "code"
-    t.integer "unit_price"
-    t.integer "max_limit"
+    t.string "name", null: false
+    t.string "code", null: false
+    t.integer "unit_price", null: false
+    t.integer "max_limit", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "features_plans", force: :cascade do |t|
-    t.bigint "plan_id"
-    t.bigint "feature_id"
+    t.bigint "plan_id", null: false
+    t.bigint "feature_id", null: false
     t.index ["feature_id"], name: "index_features_plans_on_feature_id"
     t.index ["plan_id"], name: "index_features_plans_on_plan_id"
   end
 
   create_table "plans", force: :cascade do |t|
-    t.string "name"
-    t.integer "fee"
+    t.string "name", null: false
+    t.integer "fee", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "plan_id"
+    t.bigint "user_id", null: false
+    t.bigint "plan_id", null: false
     t.string "is_recurring"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "billing_date"
+    t.date "billing_date", null: false
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "subscription_id"
-    t.integer "fee_charged"
+    t.bigint "user_id", null: false
+    t.bigint "subscription_id", null: false
+    t.integer "fee_charged", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subscription_id"], name: "index_transactions_on_subscription_id"
@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(version: 2020_10_20_134149) do
   end
 
   create_table "usages", force: :cascade do |t|
-    t.integer "units_used"
-    t.bigint "subscription_id"
-    t.bigint "feature_id"
+    t.integer "units_used", null: false
+    t.bigint "subscription_id", null: false
+    t.bigint "feature_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feature_id"], name: "index_usages_on_feature_id"
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 2020_10_20_134149) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "type"
+    t.string "name", null: false
+    t.string "type", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

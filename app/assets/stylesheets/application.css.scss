@@ -1,13 +1,26 @@
 @import "bootstrap";
-.style_image{
+.style_image {
   width: 40px;
   height: 30px;
 }
 
-a{
+.link {
   text-decoration: none;
   color: white;
 }
-table{
-  margin-top: 50px;
+
+.mt-30 {
+  margin-top: 30px;
 }
+
+.mt {
+  margin-top: 20px;
+}
+
+.alert {
+   padding: 20px;
+   text-align: center;
+}
+a:hover {
+  color: white;
+ }

@@ -25,11 +25,11 @@
                 <%= subscription.billing_date %>
               </td>
               <td>
-                <%= link_to 'Usage', subscription_path(subscription) %>
+                <%= link_to 'Usage', subscription_path(subscription), class:'link' %>
               </td>
               <% if current_user.type == 'Admin' %>
                 <td>
-                  <%= link_to 'Bill', "/bill/billing/#{subscription.id}"  %>
+                  <%= link_to 'Bill', billing_path(subscription.id), class:'link'  %>
                 </td>
               <% end %>
             </tr>
