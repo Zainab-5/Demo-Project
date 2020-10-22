@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   resources :plans
   resources :features
   resources :usages
-  match 'bill/billing/:id' => "bill#billing", :via => :get
-  #get 'subscriptions/billing' to: 'subscriptions#billing'
-  get 'welcome/index'
+  get 'billing/:id' => 'bill#billing', as: :billing, via: :get
   devise_scope :user do
     root to: "devise/sessions#new"
   end
