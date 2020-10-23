@@ -44,7 +44,8 @@ class FeaturesController < ApplicationController
   end
 
   private
-    def feature_params
-      params.require(:feature).permit(:name, :unit_price, :max_limit, :code)
-    end
+
+  def feature_params
+    params.require(:feature).permit(:name, :unit_price, :max_limit, :code)
+  end
 end

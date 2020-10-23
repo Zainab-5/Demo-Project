@@ -4,6 +4,7 @@
     <table class="table table-dark">
       <thead>
         <tr>
+          <th>subscription ID</th>
           <th>Feature</th>
           <th>Units Used</th>
         </tr>
@@ -11,6 +12,9 @@
       <tbody>
         <% @usages.each do |usage| %>
             <tr>
+             <td>
+                <%= usage.subscription_id %>
+              </td>
               <td>
                 <%= usage.feature.name %>
               </td>

@@ -1,5 +1,4 @@
 class UsagePolicy < ApplicationPolicy
-
   def create?
     return true if user.type == 'Admin'
   end
@@ -15,5 +14,4 @@ class UsagePolicy < ApplicationPolicy
   def destroy?
     return true if user.type == 'Admin'
   end
-
 end

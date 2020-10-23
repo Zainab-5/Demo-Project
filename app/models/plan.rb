@@ -4,6 +4,6 @@ class Plan < ApplicationRecord
   has_many :subscriptions
   has_many :buyers, through: :subscriptions, foreign_key: 'user_id'
   accepts_nested_attributes_for :features
-  before_destroy {|plan| plan.features.clear}
-  validates :name, :fee, presence: true
+  before_destroy { |plan| plan.features.clear }
+  validates :name, :fee, :user_id,  presence: true
 end

@@ -18,7 +18,11 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(".alert" ).fadeOut(3000);
+$(document).on('turbolinks:load', function() {
+  $(".alert" ).fadeOut(3000);
+
+});
+
 
 $(document).on('turbolinks:load', function() {
   $(".nav-item a").click(function() {

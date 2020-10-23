@@ -1,10 +1,10 @@
 class PlansController < ApplicationController
   def index
-   @plan = Plan.all
+    @plan = Plan.all
   end
 
   def new
-     @plan = Plan.new
+    @plan = Plan.new
   end
 
   def create
@@ -38,20 +38,19 @@ class PlansController < ApplicationController
     begin
       respond_to do |format|
         if @plan.destroy
-          puts "destroyed"
           format.html { redirect_to plans_path, notice: 'Plan was successfully destroyed.' }
           format.js
         end
       end
     rescue => exception
-      flash[:notice] = "Cannot delete a Subscribed Plan"
+      flash[:notice] = 'Cannot delete a Subscribed Plan'
       redirect_to plans_path
     end
-
   end
 
   private
-    def plan_params
-      params.require(:plan).permit(:name, :fee, feature_ids: [])
-    end
+
+  def plan_params
+    params.require(:plan).permit(:name, :fee, feature_ids: [])
+  end
 end

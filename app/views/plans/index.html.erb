@@ -1,44 +1,70 @@
-
-<div class="row">
-  <div class="col-md-8 mx-auto" id="abc">
-
-   <table class="table table-dark">
-      <h2 class="text-center"><strong>Plans</strong></h2>
-      <thead>
-        <tr>
-          <th>Plan Name</th>
-          <th>Fee</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @plan.each do |plan| %>
-            <tr id="plan_<%= plan.id %>">
-              <td>
-                <%= plan.name %>
-              </td>
-              <td>
-                <%= plan.fee %>
-              </td>
-              <% if user_signed_in? && current_user.type == 'Admin'  %>
-                <td>
-                  <%= link_to 'Edit', edit_plan_path(plan), class:'link' %>
-                </td>
-                <td>
-                  <%= link_to 'Delete', plan_path(plan),remote: true, method: :delete, data: { confirm: "Are you sure?" }, class:'link' %>
-                </td>
-              <% end %>
-            </tr>
-
-        <% end %>
-      </tbody>
-   </table>
-</div>
-</div>
-
 <% if current_user.type == 'Admin' %>
-    <div class="row">
-      <div class="col-md-8 mx-auto" >
-        <%= link_to 'Create Plan', new_plan_path, class: 'btn btn-success' %>
+  <div class="row">
+    <div class="col-md-8 mx-auto" id="abc">
+      <table class="table table-dark">
+          <h2 class="text-center"><strong>Plans</strong></h2>
+          <thead>
+            <tr>
+              <th>Plan Name</th>
+              <th>Fee</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @plan.each do |plan| %>
+                <tr id="plan_<%= plan.id %>">
+                  <td>
+                    <%= plan.name %>
+                  </td>
+                  <td>
+                    <%= plan.fee %>
+                  </td>
+                  <% if user_signed_in? && current_user.type == 'Admin'  %>
+                    <td>
+                      <%= link_to 'Edit', edit_plan_path(plan), class:'link' %>
+                    </td>
+                    <td>
+                      <%= link_to 'Delete', plan_path(plan),remote: true, method: :delete, data: { confirm: "Are you sure?" }, class:'link' %>
+                    </td>
+                  <% end %>
+                </tr>
+
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mx-auto" >
+      <%= link_to 'Create Plan', new_plan_path, class: 'btn btn-success' %>
+    </div>
+  </div>
+<% else %>
+
+<div class="plans">
+ <% @plan.each do |plan| %>
+    <div class="plan-box">
+      <div class="plan-options">
+        <p class="plan-name">
+          <%= plan.name %>
+        </p>
+        <div class="plan-price">
+          <strong><%= plan.fee %>$</strong>
+        </div>
+
+        <ul class="plan-details">
+          <% plan.features.each do |feature| %>
+            <li><strong><%= feature.name %></strong> </li>
+          <% end %>
+        </ul>
+
+
+        <div class="element-hidden more-options btn">
+          <%= link_to '+Subscribe' ,{:controller => 'subscriptions', :action => 'create', :plan_id => plan.id}, method: :post %>
+        </div>
+
       </div>
     </div>
- <% end %>
+  <% end %>
+</div>
+<% end %>

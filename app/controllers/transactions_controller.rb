@@ -4,7 +4,8 @@ class TransactionsController < ApplicationController
   end
 
   private
-    def transaction_params
-      params.require(:transaction).permit(:fee_charged, :subscription_id)
-    end
+
+  def transaction_params
+    params.require(:transaction).permit(:fee_charged, :subscription_id)
+  end
 end

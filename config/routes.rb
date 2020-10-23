@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :plans
-  resources :subscriptions
-  resources :plans
-  resources :features
-  resources :usages
-  get 'billing/:id' => 'bill#billing', as: :billing, via: :get
+  resources :plans, except: [:show]
+  resources :subscriptions, except: [:destroy, :update]
+  resources :features, except: [:show]
+  resources :usages, except: [:destroy, :update]
+  get 'billing/:id' => 'bill#billing', as: :billing
   devise_scope :user do
-    root to: "devise/sessions#new"
+    root to: 'devise/sessions#new'
   end
-
 end
