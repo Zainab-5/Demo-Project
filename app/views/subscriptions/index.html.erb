@@ -1,8 +1,10 @@
  <div class="row">
    <div class="col-md-8 mx-auto" >
-
     <% if current_user.type == 'Buyer' %>
-      <h2 class="pb-200">Your Subscriptions</h2>
+      <h2 class="p">Your Subscriptions</h2>
+    <% end %>
+    <%if current_user.type == 'Admin' %>
+      <h2 class="p text-center"> <strong>Subscriptions</strong></h2>
     <% end %>
     <table class="table table-dark">
       <thead>
@@ -16,7 +18,7 @@
         <% @subscriptions.each do |subscription| %>
             <tr>
               <td>
-                <%= subscription.user_id %>
+                <%= subscription.user.name %>
               </td>
               <td>
                 <%= subscription.plan.name %>
@@ -43,9 +45,7 @@
  <% if current_user.type == 'Buyer' %>
     <div class="row">
       <div class="col-md-8 mx-auto" >
-        <%= link_to 'Create Subscription',new_subscription_path, class: 'btn btn-success' %>
+        <%= link_to 'Create Subscription', new_subscription_path, class: 'btn btn-success' %>
       </div>
     </div>
  <% end %>
-
-

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class TransactionsController < ApplicationController
   def create
-    @transaction = current_user.transactions.create(transaction_params)
+    current_user.transactions.create!(transaction_params)
   end
 
   private

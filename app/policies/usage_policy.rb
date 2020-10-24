@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsagePolicy < ApplicationPolicy
   def create?
     return true if user.type == 'Admin'

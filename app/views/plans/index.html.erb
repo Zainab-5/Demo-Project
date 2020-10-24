@@ -60,7 +60,7 @@
 
 
         <div class="element-hidden more-options btn">
-          <%= link_to '+Subscribe' ,{:controller => 'subscriptions', :action => 'create', :plan_id => plan.id}, method: :post %>
+          <%= link_to '+Subscribe', {:controller => 'subscriptions', :action => 'create', :plan_id => plan.id, :billing_date => Date.today}, method: :post %>
         </div>
 
       </div>

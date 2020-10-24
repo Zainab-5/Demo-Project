@@ -1,7 +1,7 @@
 
 <%= form_with model: @plan, local: true do |form| %>
   <% if @plan.errors.any?  %>
-    <%= render 'error', obj: @plan.errors %>
+    <%= render 'shared/error', obj: @plan.errors %>
   <% end %>
 <% end %>
 
@@ -9,11 +9,11 @@
   <%= form_with model: @plan, local: true do |form| %>
     <div class= "form-group">
       <%= form.label :name %><br>
-      <%= form.text_field :name, {class: "form-control"} %>
+      <%= form.text_field :name, required: true, {class: "form-control"} %>
     </div>
     <div class= "form-group">
       <%= form.label :fee %><br>
-      <%= form.number_field :fee,{class: "form-control"} %>
+      <%= form.number_field :fee, required: true, {class: "form-control"} %>
     </div>
     <div class= "form-group">
       <%= form.collection_check_boxes :feature_ids, Feature.all, :id, :name, {}, {multiple: true} do |b| %>

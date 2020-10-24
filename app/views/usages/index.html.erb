@@ -1,27 +1,23 @@
-
 <div class="row">
   <div class="col-md-8 mx-auto">
     <h2 class="">Usages</h2>
     <table class="table table-dark">
       <thead>
         <tr>
-          <th>Usage id</th>
-          <th>Subscription id</th>
-          <th>Feature id</th>
-          <th>Units_used</th>
+          <th>Usage Id</th>
+          <th>Subscription Id</th>
+          <th>Feature Id</th>
+          <th>Units Used</th>
         </tr>
       </thead>
       <tbody>
-        <% @usage.each do |usage| %>
+        <% @usages.each do |usage| %>
             <tr>
               <td>
-                <%= usage.id %>
+                <%= usage.subscription.plan.name %>
               </td>
               <td>
-                <%= usage.subscription_id %>
-              </td>
-              <td>
-                <%= usage.feature_id %>
+                <%= usage.feature.name %>
               </td>
               <td>
                 <%= usage.units_used %>
@@ -29,6 +25,5 @@
         <% end %>
       </tbody>
     </table>
-
   </div>
 </div>
