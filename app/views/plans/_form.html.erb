@@ -9,11 +9,11 @@
   <%= form_with model: @plan, local: true do |form| %>
     <div class= "form-group">
       <%= form.label :name %><br>
-      <%= form.text_field :name, required: true, {class: "form-control"} %>
+      <%= form.text_field :name, class: "form-control", required: true %>
     </div>
     <div class= "form-group">
       <%= form.label :fee %><br>
-      <%= form.number_field :fee, required: true, {class: "form-control"} %>
+      <%= form.number_field :fee, class: "form-control", required: true %>
     </div>
     <div class= "form-group">
       <%= form.collection_check_boxes :feature_ids, Feature.all, :id, :name, {}, {multiple: true} do |b| %>
