@@ -20,7 +20,7 @@
     </ul>
   </div>
 
-  <% if user_signed_in? %>
+  <% if user_signed_in? && current_user.image.attached? %>
     <a class="navbar-brand" href= '/users/edit' >
             <%= image_tag current_user.image, class: "style_image" %>
     </a>
