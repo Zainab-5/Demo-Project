@@ -1,4 +1,161 @@
 @import "bootstrap";
+
+
+$beige: #dfdfd7;
+$dark-grey: #272F30;
+$orange: #E0401C;
+$red: #9E2B20;
+$warm-white: #FFFCEF;
+$light-blue: #D5FFFC;
+$dull-blue: #437299;
+$base-font: Oxygen, Arial, Helvetica, sans-serif;
+$heading-font: Oswald, Arial, Helvetica, sans-serif;
+
+* {
+    box-sizing: border-box;
+    transition: all 1s;
+}
+
+body {
+  background: $beige;
+  color: $dark-grey;
+  font: 16px $base-font;
+  font-weight: 300;
+  padding: 50px 0;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.element-hidden {
+  display: none;
+}
+
+.plan-name, .plan-price, .plan-details, .button, .more-options, .best-choice {
+    padding: 10px;
+ }
+
+.plans {
+  margin: 0 auto;
+  max-width: 80%;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  .plan-box {
+    display: flex;
+    width: 33.3333%;
+    background: $warm-white;
+    margin: 10px 0;
+    min-height: 650px;
+    .best-choice {
+      background: $light-blue;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: $dull-blue;
+      @include box-shadow(inset 0 -2px 3px rgba(0, 0, 0, .15), inset 0 2px 3px rgba(0, 0, 0, .15));
+      margin-top: auto;
+    }
+    &:hover {
+      margin-top: -15px;
+      background: white;
+      @media all and (max-width: 700px) {
+        margin-top: 10px;
+      }
+
+      .plan-name {
+        color: black;
+      }
+      .plan-price {
+        background: saturate($dark-grey, 55%);
+        @include box-shadow(inset 0 -4px 3px rgba(0, 0, 0, .15), inset 0 4px 3px rgba(0, 0, 0, .15));
+        text-align: center;
+      }
+      .more-options {
+        display: block;
+        padding: 20px;
+        text-align: right;
+        position: relative;
+        .additional-options {
+          position: relative;
+          text-align: left;
+          width: 100%;
+          margin: 0;
+        }
+        a {
+          color: $dark-grey;
+          text-decoration: none;
+        }
+      }
+    }
+    @media all and (max-width: 700px) {
+      &:first-child {
+        margin-bottom: 20px;
+      }
+    }
+
+    &:nth-child(2) {
+      margin-top: 0;
+      @include box-shadow(-3px 0 3px rgba(0, 0, 0, .15), 3px 0 3px rgba(0, 0, 0, .15));
+      position: relative;
+      &:hover {
+        margin-top: -35px;
+        @media all and (max-width: 700px) {
+          margin-top: 0px;
+          marign-right: -30px;
+        }
+      }
+    }
+    @media all and (max-width: 700px) {
+      width: 100%;
+    }
+  }
+  .plan-name {
+    font: 300 32px $heading-font;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+  .plan-price {
+    background: $dark-grey;
+    color: white;
+    display: flex;
+    font: 24px $heading-font;
+    padding: 20px 10px;
+    text-align: center;
+    strong {
+      font-size: 34px;
+      align-self: baseline;
+      line-height: 1;
+      font-weight: 500;
+    }
+  }
+  .plan-options {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    li {
+      border-bottom: 1px solid #cdcdcd;
+      padding: 5px 0;
+      margin: 5px 0;
+    }
+    .button {
+      margin-top: auto;
+      display: block;
+      background: $orange;
+      color: white;
+      text-align: center;
+      font: 24px $heading-font;
+      text-decoration: none;
+      &:hover {
+        background: saturate($orange, 10%);
+      }
+     }
+   }
+}
+
 .style_image {
   width: 40px;
   height: 30px;
@@ -6,7 +163,9 @@
 
 .link {
   text-decoration: none;
-  color: white;
+  &:hover{
+    color: white;
+  }
 }
 
 .mt-30 {
@@ -21,6 +180,22 @@
    padding: 20px;
    text-align: center;
 }
-a:hover {
-  color: white;
- }
+
+.p{
+  padding: 10px;
+}
+
+.subscribe {
+  text-decoration: none;
+  font-size: 20px;
+  text-align: center;
+  color: black;
+  &:hover{
+    color: plum;
+    text-decoration: none;
+  }
+}
+
+.h-40 {
+  height: 40px;
+}

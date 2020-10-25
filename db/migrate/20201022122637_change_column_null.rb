@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnNull < ActiveRecord::Migration[5.2]
   def change
     change_column_null :users, :name, false
@@ -20,6 +22,5 @@ class ChangeColumnNull < ActiveRecord::Migration[5.2]
     change_column_null :usages, :feature_id, false
     change_column_null :usages, :subscription_id, false
     change_column_null :usages, :units_used, false
-
   end
 end

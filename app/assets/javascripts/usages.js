@@ -1,4 +1,6 @@
 jQuery(function(){
+  $(document).on('turbolinks:load', function() {
+
   $( "#usage_subscription_id" ).change(function() {
 
   var subscription = $(this).val();
@@ -20,5 +22,6 @@ jQuery(function(){
       }
     }
   });
+});
 });
 });

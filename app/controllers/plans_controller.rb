@@ -1,16 +1,21 @@
+# frozen_string_literal: true
+
 class PlansController < ApplicationController
+
   def index
-   @plan = Plan.all
+    @plan = Plan.all
   end
 
   def new
-     @plan = Plan.new
+    @plan = Plan.new
+    authorize @plan
   end
 
   def create
     @plan = current_user.plans.new(plan_params)
     authorize @plan
-    if @plan.save
+
+    if @plan.save!
       redirect_to plans_path
     else
       render 'new'
@@ -25,7 +30,8 @@ class PlansController < ApplicationController
   def update
     @plan = Plan.find(params[:id])
     authorize @plan
-    if @plan.update(plan_params)
+
+    if @plan.update!(plan_params)
       redirect_to plans_path
     else
       render 'edit'
@@ -35,23 +41,23 @@ class PlansController < ApplicationController
   def destroy
     @plan = Plan.find(params[:id])
     authorize @plan
+
     begin
       respond_to do |format|
         if @plan.destroy
-          puts "destroyed"
           format.html { redirect_to plans_path, notice: 'Plan was successfully destroyed.' }
           format.js
         end
       end
-    rescue => exception
-      flash[:notice] = "Cannot delete a Subscribed Plan"
+    rescue StandardError => e
+      flash[:notice] = 'Cannot delete a Subscribed Plan'
       redirect_to plans_path
     end
-
   end
 
   private
-    def plan_params
-      params.require(:plan).permit(:name, :fee, feature_ids: [])
-    end
+
+  def plan_params
+    params.require(:plan).permit(:name, :fee, feature_ids: [])
+  end
 end
