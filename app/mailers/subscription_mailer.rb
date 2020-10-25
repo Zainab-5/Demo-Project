@@ -3,6 +3,6 @@
 class SubscriptionMailer < ApplicationMailer
   def new_subscription_email
     @subscription = params[:subscription]
-    mail(to: current_user.email, subject: 'You got a new order!')
+    mail(to: 'zainabayaz59@gmail.com', subject: 'You got a new order!')
   end
 end

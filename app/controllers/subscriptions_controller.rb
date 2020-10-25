@@ -3,9 +3,13 @@
 class SubscriptionsController < ApplicationController
   def create
     begin
-      @subscription = current_user.subscriptions.new(plan_id: params[:plan_id], billing_date: params[:billing_date])
+
+      @subscription = Subscription.new(plan_id: params[:plan_id], billing_date: params[:billing_date], user_id: current_user.id)
+
       if @subscription.save
+
         SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
+        flash[:notice] = 'Successfully subscribed to this plan'
         redirect_to subscriptions_path
       else
         render 'new'
