@@ -4,6 +4,7 @@ class GeneralPolicy < ApplicationPolicy
   def new?
     user.type == 'Admin'
   end
+
   def update?
     user.type == 'Admin'
   end

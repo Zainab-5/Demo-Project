@@ -2,15 +2,13 @@
   <%= form_with(model: @usage, local: true) do |form| %>
     <div class="form-group">
       <%= form.label :units_used %><br>
-      <%= form.number_field :units_used %>
+      <%= form.number_field :units_used, class: 'form-control form-input' %>
     </div>
     <div class="sub form-group">
-      <%= form.label :subscription_id, "Subscription" %><br />
-      <%= form.select :subscription_id, options_for_select(@subscriptions.collect{ |u| [u.id] }) %>
+      <%= form.hidden_field :subscription_id, value: @usage.subscription_id %>
     </div>
     <div class="feature form-group">
-      <%= form.label :feature_id, "Feature" %><br />
-      <%= form.select :feature_id, options_for_select(@features.collect{ |u| [u.name, u.id] }) %>
+      <%= form.hidden_field :feature_id, value: @usage.feature_id %>
     </div>
     <div>
       <%= form.submit "Create Usage", class: 'btn btn-success'%>
