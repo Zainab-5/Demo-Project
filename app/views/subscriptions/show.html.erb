@@ -18,20 +18,13 @@
               <td>
                 <%= feature.max_limit %>
               </td>
-              <% if @subscription.usages.find_by(feature_id: feature.id).present? %>
-                <td>
-                    <% u = @subscription.usages.find_by(feature_id: feature.id) %>
-                    <%= u.units_used %>
-                </td>
-              <% else %>
-                <td>
-                   0
-                </td>
-                <% if current_user.type == 'Admin'%>
+              <td>
+                <%= @subscription.usage_used(feature.id) %>
+              </td>
+              <% if current_user.type == 'Admin' && @subscription.usage_used(feature.id) == 0 %>
                 <td>
                   <%= link_to '+Add Usage', {:controller => 'usages', :action => 'new', :subscription_id => @subscription.id, :feature_id => feature.id}, method: :get %>
                 </td>
-                <% end %>
               <% end %>
               </tr>
         <% end %>
