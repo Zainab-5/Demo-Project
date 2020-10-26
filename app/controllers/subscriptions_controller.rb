@@ -2,22 +2,18 @@
 
 class SubscriptionsController < ApplicationController
   def create
-    begin
+    @subscription = Subscription.new(plan_id: params[:plan_id], billing_date: params[:billing_date], user_id: current_user.id)
 
-      @subscription = Subscription.new(plan_id: params[:plan_id], billing_date: params[:billing_date], user_id: current_user.id)
-
-      if @subscription.save
-
-        SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
-        flash[:notice] = 'Successfully subscribed to this plan'
-        redirect_to subscriptions_path
-      else
-        render 'new'
-      end
-    rescue StandardError => e
-      flash[:notice] = 'Already subscribed to this plan'
-      redirect_to plans_path
+    if @subscription.save
+      SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
+      flash[:notice] = 'Successfully subscribed to this plan'
+      redirect_to subscriptions_path
+    else
+      render 'new'
     end
+  rescue StandardError => e
+    flash[:notice] = 'Already subscribed to this plan'
+    redirect_to plans_path
   end
 
   def index

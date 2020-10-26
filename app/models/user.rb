@@ -9,11 +9,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  #use after_create callback and have check there if mage not exists then attach default image
+  # use after_create callback and have check there if mage not exists then attach default image
   after_create do
     unless image.attached?
       image.attach(io: File.open(
-        Rails.root.join('app', 'assets', 'images', 'dummy.jpg')), filename: 'dummy.jpg', content_type: 'image/jpg')
+        Rails.root.join('app', 'assets', 'images', 'dummy.jpg')
+      ), filename: 'dummy.jpg', content_type: 'image/jpg')
     end
   end
 end

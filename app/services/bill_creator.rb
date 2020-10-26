@@ -13,7 +13,7 @@ class BillCreator
     @over_use = 0
     check = false
 
-    #add check for the double subscription for single day.
+    # add check for the double subscription for single day.
     if ((subscription.billing_date.day == Date.today.day) && (difference >= 30)) || (difference >= 30)
       usages.each do |usage|
         feature = Feature.find(usage.feature_id)

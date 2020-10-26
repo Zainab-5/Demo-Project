@@ -5,5 +5,4 @@ class Feature < ApplicationRecord
   has_many :usages
 
   validates :unit_price, :max_limit, presence: true
-
 end
