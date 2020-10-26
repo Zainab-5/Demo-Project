@@ -2,8 +2,8 @@
 
 class UsagesController < ApplicationController
   def create
-    @usage = Usage.create(usage_params)
-    redirect_to subscriptions_pathh
+    @usage = Usage.create!(usage_params)
+    redirect_to subscriptions_path
   end
 
   def new

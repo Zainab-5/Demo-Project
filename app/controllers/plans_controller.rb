@@ -2,7 +2,7 @@
 
 class PlansController < ApplicationController
   def index
-    @plan = Plan.all
+    @plans = Plan.all.includes(:features)
   end
 
   def new

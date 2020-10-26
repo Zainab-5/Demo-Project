@@ -21,7 +21,6 @@ body {
   color: $dark-grey;
   font: 16px $base-font;
   font-weight: 300;
-  padding: 50px 0;
 }
 
 ul, li {
@@ -216,4 +215,10 @@ ul, li {
 .login {
   font-size: 18px;
   line-height: 50px;
+}
+
+.left-link  {
+  font-size: 16px;
+  color: lightgray;
+  margin-right: 20px;
 }
