@@ -30,6 +30,7 @@ class SubscriptionsController < ApplicationController
 
   def show
     @subscription = Subscription.includes(:plan).find(params[:id])
+    @plan = @subscription.plan
     @usages = @subscription.usages
   end
 

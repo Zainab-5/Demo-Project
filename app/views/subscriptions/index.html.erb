@@ -38,14 +38,5 @@
         <% end %>
       </tbody>
     </table>
-
    </div>
  </div>
-
- <% if current_user.type == 'Buyer' %>
-    <div class="row">
-      <div class="col-md-8 mx-auto" >
-        <%= link_to 'Create Subscription', new_subscription_path, class: 'btn btn-success' %>
-      </div>
-    </div>
- <% end %>

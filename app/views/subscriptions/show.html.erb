@@ -5,19 +5,36 @@
       <thead>
         <tr>
           <th>Feature</th>
+          <th>Maximum Allowed</th>
           <th>Units Used</th>
         </tr>
       </thead>
       <tbody>
-        <% @usages.each do |usage| %>
+        <% @plan.features.each do |feature| %>
             <tr>
+              <td>
+                <%= feature.name %>
+              </td>
+              <td>
+                <%= feature.max_limit %>
+              </td>
+              <% if @subscription.usages.find_by(feature_id: feature.id).present? %>
+                <td>
+                    <% u = @subscription.usages.find_by(feature_id: feature.id) %>
+                    <%= u.units_used %>
+                </td>
+              <% else %>
+                <td>
+                   0
+                </td>
+                <% if current_user.type == 'Admin'%>
+                <td>
+                  <%= link_to '+Add Usage', {:controller => 'usages', :action => 'new', :subscription_id => @subscription.id, :feature_id => feature.id}, method: :get %>
+                </td>
+                <% end %>
+              <% end %>
 
-              <td>
-                <%= usage.feature.name %>
-              </td>
-              <td>
-                <%= usage.units_used %>
-              </td>
+
               </tr>
         <% end %>
       </tbody>
