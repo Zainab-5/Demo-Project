@@ -20,15 +20,4 @@
 
 $(document).on('turbolinks:load', function() {
   $(".alert" ).fadeOut(3000);
-
 });
-
-
-$(document).on('turbolinks:load', function() {
-  $(".nav-item a").click(function() {
-    $('.active').removeClass("active");
-    $(this).parent().addClass("active");
-  });
-});
-
-

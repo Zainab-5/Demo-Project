@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-User.create(name: 'Admin', password: 'aaaaaa', email: 'zainabayaz59+admin@gmail.com', type: 'Admin')
+User.create(name: 'Admin', password: 'aaaaaa', email: 'zainab.ayaz+admin@devsinc.com', type: 'Admin')

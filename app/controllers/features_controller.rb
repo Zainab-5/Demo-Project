@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FeaturesController < ApplicationController
-
   def create
     @feature = Feature.new(feature_params)
     if @feature.save!
@@ -26,9 +25,7 @@ class FeaturesController < ApplicationController
     authorize @feature
 
     respond_to do |format|
-      if @feature.destroy!
-        format.js
-      end
+      format.js if @feature.destroy!
     end
   end
 

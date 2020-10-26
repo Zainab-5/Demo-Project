@@ -2,12 +2,9 @@
 
 class SubscriptionsController < ApplicationController
   def create
+    @subscription = current_user.subscriptions.new(plan_id: params[:plan_id], billing_date: params[:billing_date])
     begin
-
-      @subscription = Subscription.new(plan_id: params[:plan_id], billing_date: params[:billing_date], user_id: current_user.id)
-
-      if @subscription.save
-
+      if @subscription.save!
         SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
         flash[:notice] = 'Successfully subscribed to this plan'
         redirect_to subscriptions_path
@@ -22,7 +19,8 @@ class SubscriptionsController < ApplicationController
 
   def index
     @subscriptions = if current_user.type == 'Buyer'
-                       Subscription.where(user_id: current_user.id).includes(:plan)
+                       current_user.subscriptions.includes(:plan, :user)
+                       #Subscription.where(user_id: current_user.id).includes(:plan, :user)
                      else
                        Subscription.all.includes(:plan)
                      end
@@ -30,6 +28,8 @@ class SubscriptionsController < ApplicationController
 
   def show
     @subscription = Subscription.includes(:plan).find(params[:id])
+
+    @plan = @subscription.plan
     @usages = @subscription.usages
   end
 

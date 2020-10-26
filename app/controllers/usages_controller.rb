@@ -2,26 +2,12 @@
 
 class UsagesController < ApplicationController
   def create
-    @usage = Usage.create(usage_params)
-    redirect_to plans_path
+    @usage = Usage.create!(usage_params)
+    redirect_to subscriptions_path
   end
 
   def new
-    @usage = Usage.new
-    @subscriptions = Subscription.all
-    @features = []
-
-    if params[:subscription].present?
-      plan = Subscription.find(params[:subscription]).plan
-      @features = plan.features
-    end
-    if request.xhr?
-      respond_to do |format|
-        format.json do
-          render json: { features: @features }
-        end
-      end
-    end
+    @usage = Usage.new(subscription_id: params[:subscription_id], feature_id: params[:feature_id])
   end
 
   def index
