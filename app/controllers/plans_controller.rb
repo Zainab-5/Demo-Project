@@ -16,6 +16,7 @@ class PlansController < ApplicationController
     authorize @plan
 
     if @plan.save!
+      flash[:notice] = 'Successfully created a plan'
       redirect_to plans_path
     else
       render 'new'
@@ -32,6 +33,7 @@ class PlansController < ApplicationController
     authorize @plan
 
     if @plan.update!(plan_params)
+      flash[:notice] = 'Successfully updated a plan'
       redirect_to plans_path
     else
       render 'edit'
@@ -45,7 +47,6 @@ class PlansController < ApplicationController
     begin
       respond_to do |format|
         if @plan.destroy
-          format.html { redirect_to plans_path, notice: 'Plan was successfully destroyed.' }
           format.js
         end
       end

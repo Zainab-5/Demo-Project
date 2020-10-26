@@ -5,6 +5,7 @@ class FeaturesController < ApplicationController
   def create
     @feature = Feature.new(feature_params)
     if @feature.save!
+      flash[:notice] = 'Successfully created a feature'
       redirect_to features_path
     else
       render 'new'
@@ -41,6 +42,7 @@ class FeaturesController < ApplicationController
     authorize @feature
 
     if @feature.update!(feature_params)
+      flash[:notice] = 'Successfully updated feature.'
       redirect_to features_path
     else
       render 'edit'

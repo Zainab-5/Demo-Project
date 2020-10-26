@@ -9,7 +9,6 @@
   </head>
 
   <body>
-
     <% if !current_user %>
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -35,12 +34,12 @@
 
     <% if notice %>
     <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <%= flash[:notice] %>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= flash[:notice] %>
     </div>
     <% end %>
     <div class='container-fluid'>
-     <%= yield %>
+      <%= yield %>
     </div>
 
   </body>
