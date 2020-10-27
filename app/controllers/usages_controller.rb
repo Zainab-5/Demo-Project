@@ -2,8 +2,14 @@
 
 class UsagesController < ApplicationController
   def create
-    @usage = Usage.create!(usage_params)
-    redirect_to subscriptions_path
+    usage = Usage.new(usage_params)
+    if usage.save
+      flash[:alert] = 'Usage Successfully entered.'
+      redirect_to subscription_path(usage.subscription)
+    else
+      flash[:notice] = 'Usage not entered. Try Again.'
+      redirect_to subscriptions_path
+    end
   end
 
   def new

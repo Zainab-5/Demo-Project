@@ -1,19 +1,15 @@
 # frozen_string_literal: true
 
-class UsagePolicy < ApplicationPolicy
-  def create?
-    return true if user.type == 'Admin'
+class UsagePolicy < GeneralPolicy
+  def create
+    user.type == 'Admin'
   end
 
-  def new?
-    return true if user.type == 'Admin'
+  def new
+    user.type == 'Admin'
   end
 
-  def edit?
-    return true if user.type == 'Admin'
-  end
-
-  def destroy?
-    return true if user.type == 'Admin'
+  def index
+    user.type == 'Admin' || user.type == 'Buyer'
   end
 end

@@ -25,8 +25,9 @@ class BillCreator
 
       chargeable_amount = plan.fee + @over_use
       ActiveRecord::Base.transaction do
-        @transaction = Transaction.create(fee_charged: chargeable_amount, subscription_id: subscription.id, user_id: user.id)
-        TransactionMailer.with(transaction: @transaction).new_transaction_email.deliver_later
+        Transaction.create!(fee_charged: chargeable_amount, subscription_id: subscription.id,
+                            user_id: user.id, abc: false)
+        # TransactionMailer.with(transaction: @transaction).new_transaction_email.deliver_later
       end
       check = true
     end

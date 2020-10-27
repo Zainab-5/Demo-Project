@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class FeaturesController < ApplicationController
+  before_action :find_feature, only: %i[destroy edit update]
+
   def create
     @feature = Feature.new(feature_params)
-    if @feature.save!
+    authorize @feature
+    if @feature.save
       flash[:notice] = 'Successfully created a feature'
       redirect_to features_path
     else
@@ -21,23 +24,14 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
-    @feature = Feature.find(params[:id])
-    authorize @feature
-
     respond_to do |format|
-      format.js if @feature.destroy!
+      format.js if @feature.destroy
     end
   end
 
-  def edit
-    @feature = Feature.find(params[:id])
-    authorize @feature
-  end
+  def edit; end
 
   def update
-    @feature = Feature.find(params[:id])
-    authorize @feature
-
     if @feature.update!(feature_params)
       flash[:notice] = 'Successfully updated feature.'
       redirect_to features_path
@@ -50,5 +44,10 @@ class FeaturesController < ApplicationController
 
   def feature_params
     params.require(:feature).permit(:name, :unit_price, :max_limit, :code)
+  end
+
+  def find_feature
+    @feature = Feature.find(params[:id])
+    authorize @feature
   end
 end

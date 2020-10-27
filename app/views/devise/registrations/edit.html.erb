@@ -21,7 +21,6 @@
         <%= f.file_field :image, class: "form-control form-input" %>
       </div>
 
-
       <div class="field">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-input", placeholder: "Password ( #{@minimum_password_length} characters minimum)" %>
@@ -46,7 +45,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "Update", class: 'btn btn-dark button', style: "width: 420px;"  %>
+        <%= f.submit "Update", class: 'btn btn-dark button full-width'%>
       </div>
     <% end %>
 

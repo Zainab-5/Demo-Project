@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
+  before_action :find_plan, only: %i[destroy edit update]
+
   def create
-    @subscription = current_user.subscriptions.new(plan_id: params[:plan_id], billing_date: params[:billing_date])
+    @subscription = current_user.subscriptions.new(subscription_params)
+    authorize @subscription
+
     begin
-      if @subscription.save!
-        SubscriptionMailer.with(subscription: @subscription).new_subscription_email.deliver
-        flash[:notice] = 'Successfully subscribed to this plan'
-        redirect_to subscriptions_path
-      else
-        render 'new'
-      end
+      @subscription.save!
+      flash[:alert] = 'Successfully subscribed to this plan'
+      redirect_to subscriptions_path
     rescue StandardError => e
       flash[:notice] = 'Already subscribed to this plan'
       redirect_to plans_path
@@ -20,9 +20,8 @@ class SubscriptionsController < ApplicationController
   def index
     @subscriptions = if current_user.type == 'Buyer'
                        current_user.subscriptions.includes(:plan, :user)
-                       #Subscription.where(user_id: current_user.id).includes(:plan, :user)
                      else
-                       Subscription.all.includes(:plan)
+                       Subscription.where({}).includes(:plan)
                      end
   end
 
@@ -36,6 +35,9 @@ class SubscriptionsController < ApplicationController
   private
 
   def subscription_params
-    params.require(:billing_date, :plan_id)
+    {
+      plan_id: params[:plan_id],
+      billing_date: params[:billing_date]
+    }
   end
 end
