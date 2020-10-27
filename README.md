@@ -24,6 +24,9 @@ To bill a user Bill_Creator service is used.
 # Helpers
 Application helper is used to add active class to current page.
 
+# Action mailer
+Action mailers are configured to send email to user as soon as he subscribes for a plan or when an admin successfully charges bill from a user.
+
 # Assumptions
 Admin can add usage for a particular feature or a specific subscription only one time.
 
