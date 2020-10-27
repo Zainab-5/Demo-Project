@@ -27,7 +27,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def show
-    @subscription = Subscription.includes(:usages, {plan: :features}).find(params[:id])
+    @subscription = Subscription.includes(:usages, { plan: :features }).find(params[:id])
 
     @plan = @subscription.plan
     @usages = @subscription.usages

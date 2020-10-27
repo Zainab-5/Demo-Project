@@ -1,6 +1,5 @@
 @import "bootstrap";
 
-
 $beige: #dfdfd7;
 $dark-grey: #272F30;
 $orange: #E0401C;
@@ -210,6 +209,7 @@ ul, li {
   padding: 20px;
   border: solid thin;
   border-color: LightGrey;
+  background-color: lightyellow;
 }
 
 .login {
@@ -222,3 +222,18 @@ ul, li {
   color: lightgray;
   margin-right: 20px;
 }
+
+.button  {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.heading{
+  font-size: 18px;
+  line-height: 50px;
+}
+
+#navigation li.current {
+   background-color: #ff0;
+}
+
