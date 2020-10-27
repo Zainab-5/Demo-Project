@@ -21,4 +21,10 @@ run rails db:seed to make admin user.
 # Services
 To bill a user Bill_Creator service is used.
 
+# Helpers
+Application helper is used to add active class to current page.
+
+# Assumptions
+Admin can add usage for a particular feature or a specific subscription only one time.
+
 
