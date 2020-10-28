@@ -11,12 +11,11 @@ class Transaction < ApplicationRecord
   private
 
   def send_email
-    transaction = Transaction.find(id)
-    byebug
+    @transaction = Transaction.find(id)
     if created_via_subscriptions
-      TransactionMailer.with(transaction: transaction).new_subscription_email.deliver
+      TransactionMailer.with(transaction: @transaction).new_subscription_email.deliver
     else
-      TransactionMailer.with(transaction: transaction).new_transaction_email.deliver_later
+      TransactionMailer.with(transaction: @transaction).new_transaction_email.deliver
     end
   end
 end

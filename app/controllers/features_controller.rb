@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FeaturesController < ApplicationController
-  before_action :find_feature, only: %i[destroy edit update]
+  before_action :authorize_feature, only: %i[destroy edit update]
 
   def create
     @feature = Feature.new(feature_params)
@@ -46,7 +46,7 @@ class FeaturesController < ApplicationController
     params.require(:feature).permit(:name, :unit_price, :max_limit, :code)
   end
 
-  def find_feature
+  def authorize_feature
     @feature = Feature.find(params[:id])
     authorize @feature
   end

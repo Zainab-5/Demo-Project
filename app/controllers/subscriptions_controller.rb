@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-  before_action :find_plan, only: %i[destroy edit update]
+
 
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
       @subscription.save!
       flash[:alert] = 'Successfully subscribed to this plan'
       redirect_to subscriptions_path
-    rescue StandardError => e
+    rescue StandardError
       flash[:notice] = 'Already subscribed to this plan'
       redirect_to plans_path
     end
@@ -29,7 +29,7 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.includes(:usages, { plan: :features }).find(params[:id])
 
     @plan = @subscription.plan
-    @usages = @subscription.usages
+    @usages = @subscription.usages.where(is_billed: false)
   end
 
   private
@@ -39,5 +39,9 @@ class SubscriptionsController < ApplicationController
       plan_id: params[:plan_id],
       billing_date: params[:billing_date]
     }
+  end
+
+  def authorize_subscription
+    authorize @subscription
   end
 end

@@ -3,6 +3,7 @@
 class UsagesController < ApplicationController
   def create
     usage = Usage.new(usage_params)
+    authorize usage
     if usage.save
       flash[:alert] = 'Usage Successfully entered.'
       redirect_to subscription_path(usage.subscription)
@@ -14,6 +15,7 @@ class UsagesController < ApplicationController
 
   def new
     @usage = Usage.new(subscription_id: params[:subscription_id], feature_id: params[:feature_id])
+    authorize @usage
   end
 
   def index
