@@ -19,22 +19,9 @@ Layout/HashAlignment:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Configuration parameters: AllowDoxygenCommentStyle, AllowGemfileRubyComment.
-Layout/LeadingCommentSpace:
-  Exclude:
-    - 'app/controllers/subscriptions_controller.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 Lint/DeprecatedClassMethods:
   Exclude:
     - 'config/application.rb'
-
-# Offense count: 2
-Lint/UselessAssignment:
-  Exclude:
-    - 'app/controllers/plans_controller.rb'
-    - 'app/controllers/subscriptions_controller.rb'
 
 # Offense count: 3
 # Configuration parameters: IgnoredMethods.
@@ -62,12 +49,6 @@ Security/YAMLLoad:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'app/controllers/plans_controller.rb'
-
 # Offense count: 2
 Style/MixinUsage:
   Exclude:
@@ -94,4 +75,4 @@ Style/StringLiterals:
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Layout/LineLength:
-  Max: 155
+  Max: 120
