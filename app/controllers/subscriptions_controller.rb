@@ -2,17 +2,15 @@
 
 class SubscriptionsController < ApplicationController
 
-
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
-    authorize @subscription
 
     begin
       @subscription.save!
       flash[:alert] = 'Successfully subscribed to this plan'
       redirect_to subscriptions_path
     rescue StandardError
-      flash[:notice] = 'Already subscribed to this plan'
+      flash[:notice] =  e
       redirect_to plans_path
     end
   end
