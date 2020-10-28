@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BillCreator
-
   def initialize(subscription_id)
     @subscription = Subscription.find(subscription_id)
     @user = @subscription.user
@@ -23,10 +22,10 @@ class BillCreator
           @over_use = (exceeded_units * feature.unit_price) + @over_use
         end
         usage.toggle(:is_billed)
-        end
-        @chargeable_amount = @plan.fee + @over_use
-        make_transaction
-        @check = true
+      end
+      @chargeable_amount = @plan.fee + @over_use
+      make_transaction
+      @check = true
     end
     @check
   end
@@ -39,5 +38,5 @@ class BillCreator
                           user_id: @user.id, created_via_subscriptions: false)
     end
     check = true
- end
+  end
 end
