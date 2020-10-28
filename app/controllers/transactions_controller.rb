@@ -2,11 +2,13 @@
 
 class TransactionsController < ApplicationController
   def create
-    transaction = current_user.transactions.create!(transaction_params)
-    authorize transaction
-  rescue StandardError => e
-    flash[:notice] = 'Transaction failed'
-    redirect_to plans_path
+    begin
+      transaction = current_user.transactions.create!(transaction_params)
+      authorize transaction
+    rescue StandardError
+      flash[:notice] = 'Transaction failed'
+      redirect_to plans_path
+    end
   end
 
   private

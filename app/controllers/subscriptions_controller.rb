@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-
   def create
     @subscription = current_user.subscriptions.new(subscription_params)
 
@@ -9,8 +8,8 @@ class SubscriptionsController < ApplicationController
       @subscription.save!
       flash[:alert] = 'Successfully subscribed to this plan'
       redirect_to subscriptions_path
-    rescue StandardError => e
-      flash[:notice] =  e
+    rescue StandardError
+      flash[:notice] = 'Already subscribed to this plan'
       redirect_to plans_path
     end
   end
