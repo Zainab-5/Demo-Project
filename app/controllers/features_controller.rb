@@ -32,7 +32,7 @@ class FeaturesController < ApplicationController
   def edit; end
 
   def update
-    if @feature.update(feature_params)
+    if @feature.update!(feature_params)
       flash[:notice] = 'Successfully updated feature.'
       redirect_to features_path
     else

@@ -13,6 +13,7 @@ class Subscription < ApplicationRecord
   private
 
   def create_transaction
+
     ActiveRecord::Base.transaction do
       plan = Plan.find(plan_id)
       t = Transaction.create(fee_charged: plan.fee, subscription_id: id, user_id: user_id, created_via_subscriptions: true)

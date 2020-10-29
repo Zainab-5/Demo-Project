@@ -16,10 +16,11 @@ class PlansController < ApplicationController
     @plan = current_user.plans.new(plan_params)
     authorize @plan
 
-    if @plan.save
+    begin
+      @plan.save!
       flash[:alert] = 'Successfully created a plan'
       redirect_to plans_path
-    else
+    rescue StandardError => e
       flash[:notice] = 'Cannot create a plan'
       redirect_to plans_path
     end
