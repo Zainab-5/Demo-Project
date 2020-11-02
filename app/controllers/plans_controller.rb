@@ -2,6 +2,7 @@
 
 class PlansController < ApplicationController
   before_action :authorize_plan, only: %i[destroy edit update]
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   def index
     @plans = Plan.where({}).includes(:features)
@@ -28,6 +29,7 @@ class PlansController < ApplicationController
   def edit; end
 
   def update
+    authorize @plan
     if @plan.update(plan_params)
       flash[:alert] = 'Successfully updated a plan'
       redirect_to plans_path
@@ -52,5 +54,10 @@ class PlansController < ApplicationController
   def authorize_plan
     @plan = Plan.find(params[:id])
     authorize @plan
+  end
+
+  def not_authorized
+    flash[:alert] = 'You are not authorized to do this action.'
+    redirect_to plans_path
   end
 end
