@@ -11,6 +11,9 @@ User can update his account.
 # Dependencies
 * pundit gem
 * devise gem
+* factorybot
+* Faker
+* Rspec-rails
 
 # Database creation
 * Postgresql
